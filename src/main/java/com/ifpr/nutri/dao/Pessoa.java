@@ -1,3 +1,4 @@
+// src/main/java/com/ifpr/nutri/dao/Pessoa.java
 package com.ifpr.nutri.dao;
 
 import jakarta.persistence.*;
@@ -5,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.SequenceGenerator;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -14,22 +15,44 @@ import jakarta.persistence.SequenceGenerator;
 @Setter
 public class Pessoa {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-    
-    @Column(name = "nome", length = 50, nullable = false)
+
+    @Column(length = 50, nullable = false)
+    private String username;
+
+    @Column(length = 50, nullable = false)
     private String nome;
-    
-    @Column(name = "sobrenome", length = 50, nullable = false)
-    private String sobrenome;
-    
-    @Column(name = "cpf", length = 11, nullable = false, unique = true)
+
+    @Column(length = 11, nullable = false, unique = true)
     private String cpf;
-    
-    @Column(name = "endereco", length = 100)
-    private String endereco;
-    
-    @Column(name = "email", length = 100, nullable = false, unique = true)
-    private String email;
+
+    @Column(nullable = false)
+    private String senha;
+
+    @Column
+    private Integer idade;
+
+    @Column
+    private Double peso;
+
+    @Column
+    private Double altura;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "pessoa_objetivos",
+            joinColumns = @JoinColumn(name = "pessoa_id")
+    )
+    @Column(length = 100)
+    private List<String> objetivos;
+
+    @ManyToMany
+    @JoinTable(
+            name = "pessoa_restricoes",
+            joinColumns = @JoinColumn(name = "pessoa_id"),
+            inverseJoinColumns = @JoinColumn(name = "alimento_id")
+    )
+    private List<Alimento> restricoesAlimentares;
 }
