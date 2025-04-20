@@ -55,4 +55,7 @@ public class Pessoa {
             inverseJoinColumns = @JoinColumn(name = "alimento_id")
     )
     private List<Alimento> restricoesAlimentares;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Refeicao> refeicoes;
 }
