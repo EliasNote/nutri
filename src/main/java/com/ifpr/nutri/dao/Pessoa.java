@@ -1,4 +1,3 @@
-// src/main/java/com/ifpr/nutri/dao/Pessoa.java
 package com.ifpr.nutri.dao;
 
 import jakarta.persistence.*;

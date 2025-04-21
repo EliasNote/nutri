@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import com.ifpr.nutri.dao.Refeicao;
 
 @Entity
 @AllArgsConstructor
