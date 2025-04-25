@@ -24,13 +24,8 @@ public class Refeicao {
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
 
-    @ManyToMany
-    @JoinTable(
-        name = "refeicao_alimentos",
-        joinColumns = @JoinColumn(name = "refeicao_id"),
-        inverseJoinColumns = @JoinColumn(name = "alimento_id")
-    )
-    private List<Alimento> alimentos;
+    @OneToMany(mappedBy = "refeicao", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemAlimento> itens;
 
     @Column(nullable = false)
     private LocalDateTime data;

@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import jakarta.persistence.OneToMany;
 import java.util.List;
+import com.ifpr.nutri.dao.ItemAlimento;
 
 @Entity
 @AllArgsConstructor
@@ -43,6 +44,9 @@ public class Alimento {
 
     @ManyToMany(mappedBy = "alimentos")
     private List<Refeicao> refeicoes;
+
+    @OneToMany(mappedBy = "alimento")
+    private List<ItemAlimento> itens;
 
     public enum Unidade {
         GRAMAS,
