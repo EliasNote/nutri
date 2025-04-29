@@ -6,16 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class ItemAlimento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +22,46 @@ public class ItemAlimento {
     private Refeicao refeicao;
     
     private Double quantidade;
+
+    public ItemAlimento() {
+    }
+
+    public ItemAlimento(Long id, Alimento alimento, Refeicao refeicao, Double quantidade) {
+        this.id = id;
+        this.alimento = alimento;
+        this.refeicao = refeicao;
+        this.quantidade = quantidade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Alimento getAlimento() {
+        return alimento;
+    }
+
+    public void setAlimento(Alimento alimento) {
+        this.alimento = alimento;
+    }
+
+    public Refeicao getRefeicao() {
+        return refeicao;
+    }
+
+    public void setRefeicao(Refeicao refeicao) {
+        this.refeicao = refeicao;
+    }
+
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
+    }
 }

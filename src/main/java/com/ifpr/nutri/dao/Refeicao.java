@@ -1,19 +1,11 @@
 package com.ifpr.nutri.dao;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class Refeicao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +31,56 @@ public class Refeicao {
         ALMOCO,
         JANTAR,
         LANCHE
+    }
+
+    public Refeicao() {
+    }
+
+    public Refeicao(Long id, Pessoa pessoa, List<ItemAlimento> itens, LocalDateTime data, Tipo tipo) {
+        this.id = id;
+        this.pessoa = pessoa;
+        this.itens = itens;
+        this.data = data;
+        this.tipo = tipo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public List<ItemAlimento> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemAlimento> itens) {
+        this.itens = itens;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 }
