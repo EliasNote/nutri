@@ -33,9 +33,6 @@ public class Alimento {
     @ManyToMany(mappedBy = "restricoesAlimentares")
     private List<Pessoa> pessoas;
 
-    @ManyToMany(mappedBy = "alimentos")
-    private List<Refeicao> refeicoes;
-
     @OneToMany(mappedBy = "alimento")
     private List<ItemAlimento> itens;
 
@@ -49,7 +46,7 @@ public class Alimento {
     public Alimento() {
     }
 
-    public Alimento(Long id, String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao, List<Pessoa> pessoas, List<Refeicao> refeicoes, List<ItemAlimento> itens) {
+    public Alimento(Long id, String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao, List<Pessoa> pessoas, List<ItemAlimento> itens) {
         this.id = id;
         this.nome = nome;
         this.calorias = calorias;
@@ -58,7 +55,6 @@ public class Alimento {
         this.gorduras = gorduras;
         this.porcao = porcao;
         this.pessoas = pessoas;
-        this.refeicoes = refeicoes;
         this.itens = itens;
     }
 
@@ -124,14 +120,6 @@ public class Alimento {
 
     public void setPessoas(List<Pessoa> pessoas) {
         this.pessoas = pessoas;
-    }
-
-    public List<Refeicao> getRefeicoes() {
-        return refeicoes;
-    }
-
-    public void setRefeicoes(List<Refeicao> refeicoes) {
-        this.refeicoes = refeicoes;
     }
 
     public List<ItemAlimento> getItens() {
