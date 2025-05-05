@@ -1,8 +1,9 @@
 package com.ifpr.nutri.controller;
 
 import com.ifpr.nutri.dao.Alimento;
-import com.ifpr.nutri.repository.AlimentoRepository;
+import com.ifpr.nutri.service.AlimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,20 +14,16 @@ import java.util.List;
 public class AlimentoController {
 
     @Autowired
-    private AlimentoRepository alimentoRepository;
+    private AlimentoService alimentoService;
 
-    // POST /alimentos
     @PostMapping
-    public Alimento criarAlimento(@RequestBody Alimento alimento) {
-        return alimentoRepository.save(alimento);
+    public ResponseEntity<Alimento> criarAlimento(@RequestBody Alimento alimento) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(alimentoService.create(alimento));
     }
 
-    // GET /alimentos/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Alimento> buscarPorId(@PathVariable Long id) {
-        return alimentoRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(alimentoService.findById(id));
     }
 
 }
