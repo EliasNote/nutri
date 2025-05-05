@@ -33,6 +33,7 @@ public class Alimento {
     @ManyToMany(mappedBy = "restricoesAlimentares")
     private List<Pessoa> pessoas;
 
+
     @OneToMany(mappedBy = "alimento")
     private List<ItemAlimento> itens;
 
@@ -46,7 +47,7 @@ public class Alimento {
     public Alimento() {
     }
 
-    public Alimento(Long id, String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao, List<Pessoa> pessoas, List<ItemAlimento> itens) {
+    public Alimento(Long id, String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao, List<Pessoa> pessoas, List<Refeicao> refeicoes, List<ItemAlimento> itens) {
         this.id = id;
         this.nome = nome;
         this.calorias = calorias;

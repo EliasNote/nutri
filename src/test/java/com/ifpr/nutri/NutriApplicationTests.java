@@ -8,6 +8,7 @@ class NutriApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}
 
+	}
 }
+
