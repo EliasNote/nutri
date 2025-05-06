@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/alimentos")
 public class AlimentoController {
@@ -22,6 +25,11 @@ public class AlimentoController {
     @GetMapping("/{id}")
     public ResponseEntity<Alimento> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(alimentoService.findById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Alimento>> buscarTodos() {
+        return ResponseEntity.ok(alimentoService.findAll());
     }
 
 }

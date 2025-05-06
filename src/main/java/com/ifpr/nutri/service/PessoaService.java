@@ -17,4 +17,13 @@ public class PessoaService {
 
         return pessoaRepository.save(pessoa);
     }
+
+    public boolean autenticar(String cpf, String senha) {
+        Pessoa pessoa = pessoaRepository.findByCpf(cpf);
+        if (pessoa != null) {
+            return BCrypt.checkpw(senha, pessoa.getSenha());
+        }
+        return false;
+
+    }
 }
