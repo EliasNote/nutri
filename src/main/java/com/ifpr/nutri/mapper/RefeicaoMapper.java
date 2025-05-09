@@ -1,20 +1,20 @@
 package com.ifpr.nutri.mapper;
 
-import com.ifpr.nutri.dao.Alimento;
 import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dao.ItemAlimento;
-import com.ifpr.nutri.dto.alimento.ItemAlimentoResponseDto;
+import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
+import com.ifpr.nutri.service.AlimentoService;
 
 import java.util.List;
 
 public class RefeicaoMapper {
 
     public static RefeicaoResponseDto toResponseDto(Refeicao refeicao) {
-        List<ItemAlimentoResponseDto> itens = refeicao.getItens().stream()
+        List<ItemAlimentoDto> itens = refeicao.getItens().stream()
                 .map(x -> {
-                    return new ItemAlimentoResponseDto(
+                    return new ItemAlimentoDto(
                             x.getAlimento().getId(),
                             x.getQuantidade());
                 }).toList();
@@ -28,7 +28,7 @@ public class RefeicaoMapper {
         );
     }
 
-    public static Refeicao updateFromDto(Refeicao refeicao, RefeicaoUpdateDto dto) {
+    public static Refeicao updateFromDto(Refeicao refeicao, List<ItemAlimento> itensAlimentos, RefeicaoUpdateDto dto) {
         if (dto.data() != null) {
             refeicao.setData(dto.data());
         }
@@ -36,18 +36,10 @@ public class RefeicaoMapper {
             refeicao.setTipo(Refeicao.Tipo.valueOf(dto.tipo()));
         }
         if (dto.itens() != null) {
-            List<ItemAlimento> itens = dto.itens().stream()
-                    .map(itemDto -> {
-                        ItemAlimento item = new ItemAlimento();
-                        Alimento alimento = new Alimento();
-                        alimento.setId(itemDto.alimentoId());
-                        item.setAlimento(alimento);
-                        item.setQuantidade(itemDto.quantidade());
-                        item.setRefeicao(refeicao);
-                        return item;
-                    })
-                    .toList();
-            refeicao.setItens(itens);
+            refeicao.getItens().clear();
+            for (ItemAlimento item : itensAlimentos) {
+                refeicao.getItens().add(item);
+            }
         }
         return refeicao;
     }

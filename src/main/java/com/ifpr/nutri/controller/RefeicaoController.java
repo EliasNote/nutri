@@ -1,6 +1,5 @@
 package com.ifpr.nutri.controller;
 
-import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dto.refeicao.RefeicaoCreateDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
@@ -29,9 +28,15 @@ public class RefeicaoController {
         return ResponseEntity.ok(refeicaoService.findAll());
     }
 
-    @PatchMapping
-    public ResponseEntity<Void> update(RefeicaoUpdateDto dto) {
-        refeicaoService.update(dto);
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody RefeicaoUpdateDto dto) {
+        refeicaoService.update(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        refeicaoService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,13 +1,12 @@
 package com.ifpr.nutri.mapper;
 
 import com.ifpr.nutri.dao.Alimento;
-import com.ifpr.nutri.dao.ItemAlimento;
 import com.ifpr.nutri.dto.alimento.AlimentoResponseDto;
 
 public class AlimentoMapper {
 
     public static AlimentoResponseDto toResponseDto(Alimento alimento) {
-        AlimentoResponseDto response = new AlimentoResponseDto(
+        return new AlimentoResponseDto(
                 alimento.getId(),
                 alimento.getNome(),
                 alimento.getCalorias(),
@@ -16,7 +15,5 @@ public class AlimentoMapper {
                 alimento.getGorduras(),
                 alimento.getPorcao().toString()
         );
-
-        return response;
     }
 }

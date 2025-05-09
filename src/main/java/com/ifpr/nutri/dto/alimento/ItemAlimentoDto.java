@@ -1,6 +1,6 @@
 package com.ifpr.nutri.dto.alimento;
 
-public record ItemAlimentoResponseDto(
+public record ItemAlimentoDto(
         Long alimentoId,
         Double quantidade
 ) {}

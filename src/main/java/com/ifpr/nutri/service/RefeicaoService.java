@@ -46,11 +46,28 @@ public class RefeicaoService {
         return toResponseDto(refeicaoRepository.save(refeicao));
     }
 
+    public Refeicao findById(Long id) {
+        return refeicaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Refeição não encontrada"));
+    }
+
     public List<RefeicaoResponseDto> findAll() {
         return refeicaoRepository.findAll().stream().map(RefeicaoMapper::toResponseDto).toList();
     }
 
-    public void update(RefeicaoUpdateDto dto) {
+    public void update(Long id, RefeicaoUpdateDto dto) {
+        Refeicao refeicao = findById(id);
+        List<ItemAlimento> itensAlimentos = dto.itens().stream().map(
+                x -> {
+                    Alimento temp = alimentoService.findById(x.alimentoId());
+                    ItemAlimento item = new ItemAlimento(temp, x.quantidade());
+                    item.setRefeicao(refeicao);
+                    return item;
+                }
+        ).toList();
+        refeicaoRepository.save(updateFromDto(refeicao, itensAlimentos, dto));
+    }
 
+    public void delete(Long id) {
+        refeicaoRepository.deleteById(id);
     }
 }
