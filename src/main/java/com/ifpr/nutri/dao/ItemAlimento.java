@@ -33,6 +33,11 @@ public class ItemAlimento {
         this.quantidade = quantidade;
     }
 
+    public ItemAlimento(Alimento alimento, Double quantidade) {
+        this.alimento = alimento;
+        this.quantidade = quantidade;
+    }
+
     public Long getId() {
         return id;
     }

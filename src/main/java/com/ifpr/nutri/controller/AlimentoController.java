@@ -1,6 +1,7 @@
 package com.ifpr.nutri.controller;
 
 import com.ifpr.nutri.dao.Alimento;
+import com.ifpr.nutri.dto.alimento.AlimentoResponseDto;
 import com.ifpr.nutri.service.AlimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,17 +19,12 @@ public class AlimentoController {
     private AlimentoService alimentoService;
 
     @PostMapping
-    public ResponseEntity<Alimento> criarAlimento(@RequestBody Alimento alimento) {
+    public ResponseEntity<AlimentoResponseDto> criarAlimento(@RequestBody Alimento alimento) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alimentoService.create(alimento));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Alimento> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(alimentoService.findById(id));
-    }
-
     @GetMapping
-    public ResponseEntity<List<Alimento>> buscarTodos() {
+    public ResponseEntity<List<AlimentoResponseDto>> buscarTodos() {
         return ResponseEntity.ok(alimentoService.findAll());
     }
 

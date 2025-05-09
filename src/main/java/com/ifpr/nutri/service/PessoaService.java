@@ -19,11 +19,14 @@ public class PessoaService {
     }
 
     public boolean autenticar(String cpf, String senha) {
-        Pessoa pessoa = pessoaRepository.findByCpf(cpf);
+        Pessoa pessoa = findByCpf(cpf);
         if (pessoa != null) {
             return BCrypt.checkpw(senha, pessoa.getSenha());
         }
         return false;
+    }
 
+    public Pessoa findByCpf(String cpf) {
+        return pessoaRepository.findByCpf(cpf).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
     }
 }

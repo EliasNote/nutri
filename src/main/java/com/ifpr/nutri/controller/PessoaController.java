@@ -16,12 +16,12 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public ResponseEntity<Pessoa> create(Pessoa pessoa) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.create(pessoa));
+    public ResponseEntity<Void> create(@RequestBody Pessoa pessoa) {
+        pessoaService.create(pessoa);
+        return ResponseEntity.noContent().build();
     }
     @PatchMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok(pessoaService.autenticar(loginDTO.getCpf(), loginDTO.getSenha()));
-
     }
 }

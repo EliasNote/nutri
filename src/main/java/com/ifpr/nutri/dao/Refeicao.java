@@ -44,6 +44,13 @@ public class Refeicao {
         this.tipo = tipo;
     }
 
+    public Refeicao(Pessoa pessoa, List<ItemAlimento> itens, LocalDateTime data, Tipo tipo) {
+        this.pessoa = pessoa;
+        this.itens = itens;
+        this.data = data;
+        this.tipo = tipo;
+    }
+
     public Long getId() {
         return id;
     }
