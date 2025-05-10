@@ -36,9 +36,7 @@ public class RefeicaoMapper {
         }
         if (dto.itens() != null) {
             refeicao.getItens().clear();
-            for (ItemAlimento item : itensAlimentos) {
-                refeicao.getItens().add(item);
-            }
+            itensAlimentos.forEach(x -> refeicao.getItens().add(x));
         }
         return refeicao;
     }
