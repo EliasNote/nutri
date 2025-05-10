@@ -50,6 +50,10 @@ public class RefeicaoService {
         return refeicaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Refeição não encontrada"));
     }
 
+    public List<Refeicao> findAllByIdAndPessoaCpf(List<Long> ids, String cpf) {
+        return refeicaoRepository.findAllByIdInAndPessoaCpf(ids, cpf);
+    }
+
     public List<RefeicaoResponseDto> findAll() {
         return refeicaoRepository.findAll().stream().map(RefeicaoMapper::toResponseDto).toList();
     }

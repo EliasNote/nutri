@@ -5,7 +5,6 @@ import com.ifpr.nutri.dao.ItemAlimento;
 import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
-import com.ifpr.nutri.service.AlimentoService;
 
 import java.util.List;
 
