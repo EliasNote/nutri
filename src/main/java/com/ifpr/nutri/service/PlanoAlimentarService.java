@@ -51,10 +51,6 @@ public class PlanoAlimentarService {
 
         List<Refeicao> refeicoes = refeicaoService.findAllByIdAndPessoaCpf(dto.refeicoesIds(), plano.getPessoa().getCpf());
 
-        if (refeicoes.isEmpty()) {
-            throw new RuntimeException("Este usuário não possui refeições");
-        }
-
         planoAlimentarRepository.save(
                 PlanoMapper.updateFromDto(plano, refeicoes, dto)
         );
