@@ -50,10 +50,13 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa")
     private List<Refeicao> refeicoes;
 
+    @OneToMany(mappedBy = "pessoa")
+    private List<PlanoAlimentar> planosAlimentares;
+
     public Pessoa() {
     }
 
-    public Pessoa(Long id, String username, String nome, String cpf, String senha, Integer idade, Double peso, Double altura, List<String> objetivos, List<Alimento> restricoesAlimentares, List<Refeicao> refeicoes) {
+    public Pessoa(Long id, String username, String nome, String cpf, String senha, Integer idade, Double peso, Double altura, List<String> objetivos, List<Alimento> restricoesAlimentares, List<Refeicao> refeicoes, List<PlanoAlimentar> planosAlimentares) {
         this.id = id;
         this.username = username;
         this.nome = nome;
@@ -65,6 +68,15 @@ public class Pessoa {
         this.objetivos = objetivos;
         this.restricoesAlimentares = restricoesAlimentares;
         this.refeicoes = refeicoes;
+        this.planosAlimentares = planosAlimentares;
+    }
+
+    public List<PlanoAlimentar> getPlanosAlimentares() {
+        return planosAlimentares;
+    }
+
+    public void setPlanosAlimentares(List<PlanoAlimentar> planosAlimentares) {
+        this.planosAlimentares = planosAlimentares;
     }
 
     public Long getId() {
