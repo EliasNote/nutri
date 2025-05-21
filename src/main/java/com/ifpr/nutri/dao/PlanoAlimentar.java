@@ -15,13 +15,9 @@ public class PlanoAlimentar {
     @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
 
-    @OneToMany
-    @JoinTable(
-        name = "plano_refeicoes",
-        joinColumns = @JoinColumn(name = "plano_id"),
-        inverseJoinColumns = @JoinColumn(name = "refeicao_id")
-    )
-    private List<Refeicao> refeicoes;
+    @ManyToOne
+    @JoinColumn(name = "plano_id")
+    private PlanoAlimentar planoAlimentar;
 
     @Column(nullable = false)
     private LocalDate dataInicio;
@@ -35,10 +31,10 @@ public class PlanoAlimentar {
     public PlanoAlimentar() {
     }
 
-    public PlanoAlimentar(Long id, Pessoa pessoa, List<Refeicao> refeicoes, LocalDate dataInicio, LocalDate dataFim, String observacoes) {
+    public PlanoAlimentar(Long id, Pessoa pessoa, PlanoAlimentar planoAlimentar, LocalDate dataInicio, LocalDate dataFim, String observacoes) {
         this.id = id;
         this.pessoa = pessoa;
-        this.refeicoes = refeicoes;
+        this.planoAlimentar = planoAlimentar;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.observacoes = observacoes;
@@ -60,12 +56,12 @@ public class PlanoAlimentar {
         this.pessoa = pessoa;
     }
 
-    public List<Refeicao> getRefeicoes() {
-        return refeicoes;
+    public PlanoAlimentar getPlanoAlimentar() {
+        return planoAlimentar;
     }
 
-    public void setRefeicoes(List<Refeicao> refeicoes) {
-        this.refeicoes = refeicoes;
+    public void setPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+        this.planoAlimentar = planoAlimentar;
     }
 
     public LocalDate getDataInicio() {

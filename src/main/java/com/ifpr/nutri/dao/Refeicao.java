@@ -19,6 +19,10 @@ public class Refeicao {
     @OneToMany(mappedBy = "refeicao", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemAlimento> itens;
 
+    @ManyToOne
+    @JoinColumn(name = "plano_id")
+    private PlanoAlimentar planoAlimentar;
+
     @Column(nullable = false)
     private LocalDateTime data;
 
@@ -36,19 +40,21 @@ public class Refeicao {
     public Refeicao() {
     }
 
-    public Refeicao(Long id, Pessoa pessoa, List<ItemAlimento> itens, LocalDateTime data, Tipo tipo) {
+    public Refeicao(Long id, Pessoa pessoa, List<ItemAlimento> itens, PlanoAlimentar planoAlimentar, LocalDateTime data, Tipo tipo) {
         this.id = id;
         this.pessoa = pessoa;
         this.itens = itens;
+        this.planoAlimentar = planoAlimentar;
         this.data = data;
         this.tipo = tipo;
     }
 
-    public Refeicao(Pessoa pessoa, List<ItemAlimento> itens, LocalDateTime data, Tipo tipo) {
-        this.pessoa = pessoa;
-        this.itens = itens;
-        this.data = data;
-        this.tipo = tipo;
+    public PlanoAlimentar getPlanoAlimentar() {
+        return planoAlimentar;
+    }
+
+    public void setPlanoAlimentar(PlanoAlimentar planoAlimentar) {
+        this.planoAlimentar = planoAlimentar;
     }
 
     public Long getId() {
