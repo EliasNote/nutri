@@ -19,12 +19,12 @@ public class AlimentoController {
     private AlimentoService alimentoService;
 
     @PostMapping
-    public ResponseEntity<AlimentoResponseDto> criarAlimento(@RequestBody Alimento alimento) {
+    public ResponseEntity<AlimentoResponseDto> create(@RequestBody Alimento alimento) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alimentoService.create(alimento));
     }
 
     @GetMapping
-    public ResponseEntity<List<AlimentoResponseDto>> buscarTodos() {
+    public ResponseEntity<List<AlimentoResponseDto>> findAll() {
         return ResponseEntity.ok(alimentoService.findAll());
     }
 

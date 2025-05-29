@@ -28,10 +28,8 @@ public class PlanoAlimentarService {
     public PlanoAlimentarResponseDto create(PlanoAlimentarCreateDto dto) {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
 
-        List<Refeicao> refeicoes = refeicaoService.findAllByIdAndPessoaCpf(dto.refeicoesIds(), dto.pessoaCpf());
-
         PlanoAlimentar plano = new PlanoAlimentar(
-                null, pessoa, refeicoes, dto.dataInicio(), dto.dataFim(), dto.observacoes()
+                null, pessoa, null, dto.dataInicio(), dto.dataFim(), dto.observacoes()
         );
 
         return PlanoMapper.toResponseDto(planoAlimentarRepository.save(plano));

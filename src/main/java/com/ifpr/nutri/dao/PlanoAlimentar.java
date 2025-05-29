@@ -15,9 +15,8 @@ public class PlanoAlimentar {
     @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
 
-    @ManyToOne
-    @JoinColumn(name = "plano_id")
-    private PlanoAlimentar planoAlimentar;
+    @OneToMany(mappedBy = "planoAlimentar", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Refeicao> refeicoes;
 
     @Column(nullable = false)
     private LocalDate dataInicio;
@@ -31,13 +30,21 @@ public class PlanoAlimentar {
     public PlanoAlimentar() {
     }
 
-    public PlanoAlimentar(Long id, Pessoa pessoa, PlanoAlimentar planoAlimentar, LocalDate dataInicio, LocalDate dataFim, String observacoes) {
+    public PlanoAlimentar(Long id, Pessoa pessoa, List<Refeicao> refeicoes, LocalDate dataInicio, LocalDate dataFim, String observacoes) {
         this.id = id;
         this.pessoa = pessoa;
-        this.planoAlimentar = planoAlimentar;
+        this.refeicoes = refeicoes;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.observacoes = observacoes;
+    }
+
+    public List<Refeicao> getRefeicoes() {
+        return refeicoes;
+    }
+
+    public void setRefeicoes(List<Refeicao> refeicoes) {
+        this.refeicoes = refeicoes;
     }
 
     public Long getId() {
@@ -54,14 +61,6 @@ public class PlanoAlimentar {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
-    }
-
-    public PlanoAlimentar getPlanoAlimentar() {
-        return planoAlimentar;
-    }
-
-    public void setPlanoAlimentar(PlanoAlimentar planoAlimentar) {
-        this.planoAlimentar = planoAlimentar;
     }
 
     public LocalDate getDataInicio() {

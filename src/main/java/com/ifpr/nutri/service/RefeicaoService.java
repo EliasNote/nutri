@@ -1,13 +1,11 @@
 package com.ifpr.nutri.service;
 
-import com.ifpr.nutri.dao.Alimento;
-import com.ifpr.nutri.dao.ItemAlimento;
-import com.ifpr.nutri.dao.Pessoa;
-import com.ifpr.nutri.dao.Refeicao;
+import com.ifpr.nutri.dao.*;
 import com.ifpr.nutri.dto.refeicao.RefeicaoCreateDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
 import com.ifpr.nutri.mapper.RefeicaoMapper;
+import com.ifpr.nutri.repository.PlanoAlimentarRepository;
 import com.ifpr.nutri.repository.RefeicaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +26,14 @@ public class RefeicaoService {
     @Autowired
     private AlimentoService alimentoService;
 
+    @Autowired
+    private PlanoAlimentarRepository planoAlimentarRepository;
+
     public RefeicaoResponseDto create(RefeicaoCreateDto dto) {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
-        Refeicao refeicao = new Refeicao(pessoa, null, dto.data(), Refeicao.Tipo.valueOf(dto.tipo()));
+        PlanoAlimentar planoAlimentar = planoAlimentarRepository.findById(dto.planoId()).orElseThrow(() -> new RuntimeException("Não achado"));
+
+        Refeicao refeicao = new Refeicao(null, pessoa, null, planoAlimentar, dto.data(), Refeicao.Tipo.valueOf(dto.tipo()));
 
         List<ItemAlimento> itensAlimentos = dto.itens().stream().map(
                 x -> {

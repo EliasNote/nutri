@@ -7,6 +7,7 @@ import java.util.List;
 
 public record RefeicaoCreateDto(
         String pessoaCpf,
+        Long planoId,
         LocalDateTime data,
         String tipo,
         List<ItemAlimentoDto> itens
