@@ -1,5 +1,6 @@
 package com.ifpr.nutri.dao;
 
+import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,6 +37,10 @@ public class ItemAlimento {
     public ItemAlimento(Alimento alimento, Double quantidade) {
         this.alimento = alimento;
         this.quantidade = quantidade;
+    }
+
+    public ItemAlimento create(ItemAlimentoDto dto) {
+        return new ItemAlimento(dto.alimento(), dto.quantidade());
     }
 
     public Long getId() {

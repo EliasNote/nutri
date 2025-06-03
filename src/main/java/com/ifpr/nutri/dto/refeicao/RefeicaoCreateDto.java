@@ -1,15 +1,18 @@
 package com.ifpr.nutri.dto.refeicao;
 
-import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
+import com.ifpr.nutri.dao.ItemAlimento;
+import com.ifpr.nutri.dao.Pessoa;
+import com.ifpr.nutri.dao.PlanoAlimentar;
+import com.ifpr.nutri.dao.Refeicao;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public record RefeicaoCreateDto(
-        String pessoaCpf,
-        Long planoId,
+        Pessoa pessoa,
+        PlanoAlimentar plano,
         LocalDateTime data,
-        String tipo,
-        List<ItemAlimentoDto> itens
+        Refeicao.Tipo tipo,
+        List<ItemAlimento> itens
 ) {
 }

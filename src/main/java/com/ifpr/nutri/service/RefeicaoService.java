@@ -1,7 +1,7 @@
 package com.ifpr.nutri.service;
 
 import com.ifpr.nutri.dao.*;
-import com.ifpr.nutri.dto.refeicao.RefeicaoCreateDto;
+import com.ifpr.nutri.dto.refeicao.RefeicaoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
 import com.ifpr.nutri.mapper.RefeicaoMapper;
@@ -29,7 +29,7 @@ public class RefeicaoService {
     @Autowired
     private PlanoAlimentarRepository planoAlimentarRepository;
 
-    public RefeicaoResponseDto create(RefeicaoCreateDto dto) {
+    public RefeicaoResponseDto create(RefeicaoDto dto) {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
         PlanoAlimentar planoAlimentar = planoAlimentarRepository.findById(dto.planoId()).orElseThrow(() -> new RuntimeException("Não achado"));
 

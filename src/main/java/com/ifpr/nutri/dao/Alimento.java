@@ -59,6 +59,10 @@ public class Alimento {
         this.itens = itens;
     }
 
+    public Alimento create(String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao) {
+        return new Alimento(null, nome, calorias, proteinas, carboidratos, gorduras, porcao, null, null, null);
+    }
+
     public Long getId() {
         return id;
     }

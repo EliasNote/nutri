@@ -3,12 +3,10 @@ package com.ifpr.nutri.service;
 import com.ifpr.nutri.dao.Pessoa;
 import com.ifpr.nutri.dao.PlanoAlimentar;
 import com.ifpr.nutri.dao.Refeicao;
-import com.ifpr.nutri.dto.plano.PlanoAlimentarCreateDto;
+import com.ifpr.nutri.dto.plano.PlanoAlimentarDto;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarResponseDto;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarUpdateDto;
-import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.mapper.PlanoMapper;
-import com.ifpr.nutri.mapper.RefeicaoMapper;
 import com.ifpr.nutri.repository.PlanoAlimentarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class PlanoAlimentarService {
     @Autowired
     private RefeicaoService refeicaoService;
 
-    public PlanoAlimentarResponseDto create(PlanoAlimentarCreateDto dto) {
+    public PlanoAlimentarResponseDto create(PlanoAlimentarDto dto) {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
 
         PlanoAlimentar plano = new PlanoAlimentar(

@@ -1,6 +1,6 @@
 package com.ifpr.nutri.controller;
 
-import com.ifpr.nutri.dto.refeicao.RefeicaoCreateDto;
+import com.ifpr.nutri.dto.refeicao.RefeicaoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
 import com.ifpr.nutri.service.RefeicaoService;
@@ -19,7 +19,7 @@ public class RefeicaoController {
     private RefeicaoService refeicaoService;
 
     @PostMapping
-    public ResponseEntity<RefeicaoResponseDto> create(@RequestBody RefeicaoCreateDto refeicao) {
+    public ResponseEntity<RefeicaoResponseDto> create(@RequestBody RefeicaoDto refeicao) {
         return ResponseEntity.status(HttpStatus.CREATED).body(refeicaoService.create(refeicao));
     }
 

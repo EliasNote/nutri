@@ -71,6 +71,10 @@ public class Pessoa {
         this.planosAlimentares = planosAlimentares;
     }
 
+    public Pessoa create(String username, String nome, String cpf, String senha, Integer idade, Double peso, Double altura, List<String> objetivos, List<Alimento> restricoesAlimentares) {
+        return new Pessoa(null, username, nome, cpf, senha, idade, peso, altura, objetivos, restricoesAlimentares, null, null);
+    }
+
     public List<PlanoAlimentar> getPlanosAlimentares() {
         return planosAlimentares;
     }

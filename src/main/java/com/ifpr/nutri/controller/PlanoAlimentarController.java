@@ -1,6 +1,6 @@
 package com.ifpr.nutri.controller;
 
-import com.ifpr.nutri.dto.plano.PlanoAlimentarCreateDto;
+import com.ifpr.nutri.dto.plano.PlanoAlimentarDto;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarResponseDto;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarUpdateDto;
 import com.ifpr.nutri.service.PlanoAlimentarService;
@@ -19,7 +19,7 @@ public class PlanoAlimentarController {
     private PlanoAlimentarService planoAlimentarService;
 
     @PostMapping
-    public ResponseEntity<PlanoAlimentarResponseDto> create(@RequestBody PlanoAlimentarCreateDto dto) {
+    public ResponseEntity<PlanoAlimentarResponseDto> create(@RequestBody PlanoAlimentarDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(planoAlimentarService.create(dto));
     }
 

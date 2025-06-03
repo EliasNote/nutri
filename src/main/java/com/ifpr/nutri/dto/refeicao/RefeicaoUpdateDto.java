@@ -1,6 +1,6 @@
 package com.ifpr.nutri.dto.refeicao;
 
-import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
+import com.ifpr.nutri.dto.alimento.ItemAlimentoCreateDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +8,6 @@ import java.util.List;
 public record RefeicaoUpdateDto(
         LocalDateTime data,
         String tipo,
-        List<ItemAlimentoDto> itens
+        List<ItemAlimentoCreateDto> itens
 ) {
 }

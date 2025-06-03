@@ -1,5 +1,6 @@
 package com.ifpr.nutri.dao;
 
+import com.ifpr.nutri.dto.plano.PlanoAlimentarCreateDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -37,6 +38,10 @@ public class PlanoAlimentar {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.observacoes = observacoes;
+    }
+
+    public PlanoAlimentar create(PlanoAlimentarCreateDto dto) {
+        return new PlanoAlimentar(null, dto.pessoa(), dto.refeicoes(), dto.dataInicio(), dto.dataFim(), dto.observacoes());
     }
 
     public List<Refeicao> getRefeicoes() {

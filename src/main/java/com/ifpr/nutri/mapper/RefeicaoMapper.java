@@ -2,7 +2,7 @@ package com.ifpr.nutri.mapper;
 
 import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dao.ItemAlimento;
-import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
+import com.ifpr.nutri.dto.alimento.ItemAlimentoCreateDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
 
@@ -11,9 +11,9 @@ import java.util.List;
 public class RefeicaoMapper {
 
     public static RefeicaoResponseDto toResponseDto(Refeicao refeicao) {
-        List<ItemAlimentoDto> itens = refeicao.getItens().stream()
+        List<ItemAlimentoCreateDto> itens = refeicao.getItens().stream()
                 .map(x -> {
-                    return new ItemAlimentoDto(
+                    return new ItemAlimentoCreateDto(
                             x.getAlimento().getId(),
                             x.getQuantidade());
                 }).toList();
