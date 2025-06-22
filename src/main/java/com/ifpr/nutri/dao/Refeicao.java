@@ -101,4 +101,58 @@ public class Refeicao {
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private Pessoa pessoa;
+        private List<ItemAlimento> itens;
+        private PlanoAlimentar planoAlimentar;
+        private LocalDateTime data;
+        private Tipo tipo;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder pessoa(Pessoa pessoa) {
+            this.pessoa = pessoa;
+            return this;
+        }
+
+        public Builder itens(List<ItemAlimento> itens) {
+            this.itens = itens;
+            return this;
+        }
+
+        public Builder planoAlimentar(PlanoAlimentar planoAlimentar) {
+            this.planoAlimentar = planoAlimentar;
+            return this;
+        }
+
+        public Builder data(LocalDateTime data) {
+            this.data = data;
+            return this;
+        }
+
+        public Builder tipo(Tipo tipo) {
+            this.tipo = tipo;
+            return this;
+        }
+
+        public Refeicao build() {
+            Refeicao r = new Refeicao();
+            r.setId(id);
+            r.setPessoa(pessoa);
+            r.setItens(itens);
+            r.setPlanoAlimentar(planoAlimentar);
+            r.setData(data);
+            r.setTipo(tipo);
+            return r;
+        }
+    }
 }

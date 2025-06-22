@@ -74,4 +74,44 @@ public class ItemAlimento {
     public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private Alimento alimento;
+        private Refeicao refeicao;
+        private Double quantidade;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder alimento(Alimento alimento) {
+            this.alimento = alimento;
+            return this;
+        }
+
+        public Builder refeicao(Refeicao refeicao) {
+            this.refeicao = refeicao;
+            return this;
+        }
+
+        public Builder quantidade(Double quantidade) {
+            this.quantidade = quantidade;
+            return this;
+        }
+
+        public ItemAlimento build() {
+            ItemAlimento item = new ItemAlimento();
+            item.setId(id);
+            item.setAlimento(alimento);
+            item.setRefeicao(refeicao);
+            item.setQuantidade(quantidade);
+            return item;
+        }
+    }
 }

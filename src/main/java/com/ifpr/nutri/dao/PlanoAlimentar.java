@@ -91,4 +91,58 @@ public class PlanoAlimentar {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private Pessoa pessoa;
+        private List<Refeicao> refeicoes;
+        private LocalDate dataInicio;
+        private LocalDate dataFim;
+        private String observacoes;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder pessoa(Pessoa pessoa) {
+            this.pessoa = pessoa;
+            return this;
+        }
+
+        public Builder refeicoes(List<Refeicao> refeicoes) {
+            this.refeicoes = refeicoes;
+            return this;
+        }
+
+        public Builder dataInicio(LocalDate dataInicio) {
+            this.dataInicio = dataInicio;
+            return this;
+        }
+
+        public Builder dataFim(LocalDate dataFim) {
+            this.dataFim = dataFim;
+            return this;
+        }
+
+        public Builder observacoes(String observacoes) {
+            this.observacoes = observacoes;
+            return this;
+        }
+
+        public PlanoAlimentar build() {
+            PlanoAlimentar p = new PlanoAlimentar();
+            p.setId(id);
+            p.setPessoa(pessoa);
+            p.setRefeicoes(refeicoes);
+            p.setDataInicio(dataInicio);
+            p.setDataFim(dataFim);
+            p.setObservacoes(observacoes);
+            return p;
+        }
+    }
 }

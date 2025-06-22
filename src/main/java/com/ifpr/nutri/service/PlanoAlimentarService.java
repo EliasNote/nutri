@@ -26,9 +26,14 @@ public class PlanoAlimentarService {
     public PlanoAlimentarResponseDto create(PlanoAlimentarDto dto) {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
 
-        PlanoAlimentar plano = new PlanoAlimentar(
-                null, pessoa, null, dto.dataInicio(), dto.dataFim(), dto.observacoes()
-        );
+        PlanoAlimentar plano = PlanoAlimentar.builder()
+                .id(null)
+                .pessoa(pessoa)
+                .refeicoes(null)
+                .dataInicio(dto.dataInicio())
+                .dataFim(dto.dataFim())
+                .observacoes(dto.observacoes())
+                .build();
 
         return PlanoMapper.toResponseDto(planoAlimentarRepository.save(plano));
     }

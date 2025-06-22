@@ -63,6 +63,81 @@ public class Alimento {
         return new Alimento(null, nome, calorias, proteinas, carboidratos, gorduras, porcao, null, null, null);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String nome;
+        private Double calorias;
+        private Double proteinas;
+        private Double carboidratos;
+        private Double gorduras;
+        private Unidade porcao;
+        private List<Pessoa> pessoas;
+        private List<ItemAlimento> itens;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder nome(String nome) {
+            this.nome = nome;
+            return this;
+        }
+
+        public Builder calorias(Double calorias) {
+            this.calorias = calorias;
+            return this;
+        }
+
+        public Builder proteinas(Double proteinas) {
+            this.proteinas = proteinas;
+            return this;
+        }
+
+        public Builder carboidratos(Double carboidratos) {
+            this.carboidratos = carboidratos;
+            return this;
+        }
+
+        public Builder gorduras(Double gorduras) {
+            this.gorduras = gorduras;
+            return this;
+        }
+
+        public Builder porcao(Unidade porcao) {
+            this.porcao = porcao;
+            return this;
+        }
+
+        public Builder pessoas(List<Pessoa> pessoas) {
+            this.pessoas = pessoas;
+            return this;
+        }
+
+        public Builder itens(List<ItemAlimento> itens) {
+            this.itens = itens;
+            return this;
+        }
+
+        public Alimento build() {
+            Alimento a = new Alimento();
+            a.setId(id);
+            a.setNome(nome);
+            a.setCalorias(calorias);
+            a.setProteinas(proteinas);
+            a.setCarboidratos(carboidratos);
+            a.setGorduras(gorduras);
+            a.setPorcao(porcao);
+            a.setPessoas(pessoas);
+            a.setItens(itens);
+            return a;
+        }
+    }
+
     public Long getId() {
         return id;
     }

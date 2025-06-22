@@ -1,6 +1,8 @@
 package com.ifpr.nutri.service;
 
 import com.ifpr.nutri.dao.*;
+import com.ifpr.nutri.dto.alimento.ItemAlimentoCreateDto;
+import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;
@@ -33,15 +35,17 @@ public class RefeicaoService {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
         PlanoAlimentar planoAlimentar = planoAlimentarRepository.findById(dto.planoId()).orElseThrow(() -> new RuntimeException("Não achado"));
 
-        Refeicao refeicao = new Refeicao(null, pessoa, null, planoAlimentar, dto.data(), Refeicao.Tipo.valueOf(dto.tipo()));
+        Refeicao refeicao = Refeicao.builder()
+                .id(null)
+                .pessoa(pessoa)
+                .itens(null)
+                .planoAlimentar(planoAlimentar)
+                .data(dto.data())
+                .tipo(Refeicao.Tipo.valueOf(dto.tipo()))
+                .build();
 
         List<ItemAlimento> itensAlimentos = dto.itens().stream().map(
-                x -> {
-                    Alimento temp = alimentoService.findById(x.alimentoId());
-                    ItemAlimento item = new ItemAlimento(temp, x.quantidade());
-                    item.setRefeicao(refeicao);
-                    return item;
-                }
+                x -> createItemAlimento(x, refeicao)
         ).toList();
 
         refeicao.setItens(itensAlimentos);
@@ -64,17 +68,22 @@ public class RefeicaoService {
     public void update(Long id, RefeicaoUpdateDto dto) {
         Refeicao refeicao = findById(id);
         List<ItemAlimento> itensAlimentos = dto.itens().stream().map(
-                x -> {
-                    Alimento temp = alimentoService.findById(x.alimentoId());
-                    ItemAlimento item = new ItemAlimento(temp, x.quantidade());
-                    item.setRefeicao(refeicao);
-                    return item;
-                }
+                x -> createItemAlimento(x, refeicao)
         ).toList();
         refeicaoRepository.save(updateFromDto(refeicao, itensAlimentos, dto));
     }
 
     public void delete(Long id) {
         refeicaoRepository.deleteById(id);
+    }
+
+    private ItemAlimento createItemAlimento(ItemAlimentoCreateDto dto, Refeicao refeicao) {
+        Alimento alimento = alimentoService.findById(dto.alimentoId());
+        ItemAlimento item = ItemAlimento.builder()
+                .alimento(alimento)
+                .quantidade(dto.quantidade())
+                .build();
+        item.setRefeicao(refeicao);
+        return item;
     }
 }

@@ -170,4 +170,100 @@ public class Pessoa {
     public void setRefeicoes(List<Refeicao> refeicoes) {
         this.refeicoes = refeicoes;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String username;
+        private String nome;
+        private String cpf;
+        private String senha;
+        private Integer idade;
+        private Double peso;
+        private Double altura;
+        private List<String> objetivos;
+        private List<Alimento> restricoesAlimentares;
+        private List<Refeicao> refeicoes;
+        private List<PlanoAlimentar> planosAlimentares;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder nome(String nome) {
+            this.nome = nome;
+            return this;
+        }
+
+        public Builder cpf(String cpf) {
+            this.cpf = cpf;
+            return this;
+        }
+
+        public Builder senha(String senha) {
+            this.senha = senha;
+            return this;
+        }
+
+        public Builder idade(Integer idade) {
+            this.idade = idade;
+            return this;
+        }
+
+        public Builder peso(Double peso) {
+            this.peso = peso;
+            return this;
+        }
+
+        public Builder altura(Double altura) {
+            this.altura = altura;
+            return this;
+        }
+
+        public Builder objetivos(List<String> objetivos) {
+            this.objetivos = objetivos;
+            return this;
+        }
+
+        public Builder restricoesAlimentares(List<Alimento> restricoesAlimentares) {
+            this.restricoesAlimentares = restricoesAlimentares;
+            return this;
+        }
+
+        public Builder refeicoes(List<Refeicao> refeicoes) {
+            this.refeicoes = refeicoes;
+            return this;
+        }
+
+        public Builder planosAlimentares(List<PlanoAlimentar> planosAlimentares) {
+            this.planosAlimentares = planosAlimentares;
+            return this;
+        }
+
+        public Pessoa build() {
+            Pessoa p = new Pessoa();
+            p.setId(id);
+            p.setUsername(username);
+            p.setNome(nome);
+            p.setCpf(cpf);
+            p.setSenha(senha);
+            p.setIdade(idade);
+            p.setPeso(peso);
+            p.setAltura(altura);
+            p.setObjetivos(objetivos);
+            p.setRestricoesAlimentares(restricoesAlimentares);
+            p.setRefeicoes(refeicoes);
+            p.setPlanosAlimentares(planosAlimentares);
+            return p;
+        }
+    }
 }
