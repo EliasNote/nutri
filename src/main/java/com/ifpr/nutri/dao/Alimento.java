@@ -47,7 +47,7 @@ public class Alimento {
     public Alimento() {
     }
 
-    public Alimento(Long id, String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao, List<Pessoa> pessoas, List<Refeicao> refeicoes, List<ItemAlimento> itens) {
+    public Alimento(Long id, String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao, List<Pessoa> pessoas, List<ItemAlimento> itens) {
         this.id = id;
         this.nome = nome;
         this.calorias = calorias;
@@ -60,7 +60,7 @@ public class Alimento {
     }
 
     public Alimento create(String nome, Double calorias, Double proteinas, Double carboidratos, Double gorduras, Unidade porcao) {
-        return new Alimento(null, nome, calorias, proteinas, carboidratos, gorduras, porcao, null, null, null);
+        return new Alimento(null, nome, calorias, proteinas, carboidratos, gorduras, porcao, null, null);
     }
 
     public static Builder builder() {
@@ -124,17 +124,17 @@ public class Alimento {
         }
 
         public Alimento build() {
-            Alimento a = new Alimento();
-            a.setId(id);
-            a.setNome(nome);
-            a.setCalorias(calorias);
-            a.setProteinas(proteinas);
-            a.setCarboidratos(carboidratos);
-            a.setGorduras(gorduras);
-            a.setPorcao(porcao);
-            a.setPessoas(pessoas);
-            a.setItens(itens);
-            return a;
+            return new Alimento(
+                    this.id,
+                    this.nome,
+                    this.calorias,
+                    this.proteinas,
+                    this.carboidratos,
+                    this.gorduras,
+                    this.porcao,
+                    this.pessoas,
+                    this.itens
+            );
         }
     }
 

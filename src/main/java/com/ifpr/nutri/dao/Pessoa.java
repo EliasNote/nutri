@@ -250,20 +250,20 @@ public class Pessoa {
         }
 
         public Pessoa build() {
-            Pessoa p = new Pessoa();
-            p.setId(id);
-            p.setUsername(username);
-            p.setNome(nome);
-            p.setCpf(cpf);
-            p.setSenha(senha);
-            p.setIdade(idade);
-            p.setPeso(peso);
-            p.setAltura(altura);
-            p.setObjetivos(objetivos);
-            p.setRestricoesAlimentares(restricoesAlimentares);
-            p.setRefeicoes(refeicoes);
-            p.setPlanosAlimentares(planosAlimentares);
-            return p;
+            return new Pessoa(
+                    this.id,
+                    this.username,
+                    this.nome,
+                    this.cpf,
+                    this.senha,
+                    this.idade,
+                    this.peso,
+                    this.altura,
+                    this.objetivos,
+                    this.restricoesAlimentares,
+                    this.refeicoes,
+                    this.planosAlimentares
+            );
         }
     }
 }

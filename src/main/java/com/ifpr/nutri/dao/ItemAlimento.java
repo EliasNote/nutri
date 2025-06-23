@@ -106,12 +106,12 @@ public class ItemAlimento {
         }
 
         public ItemAlimento build() {
-            ItemAlimento item = new ItemAlimento();
-            item.setId(id);
-            item.setAlimento(alimento);
-            item.setRefeicao(refeicao);
-            item.setQuantidade(quantidade);
-            return item;
+            return new ItemAlimento(
+                    this.id,
+                    this.alimento,
+                    this.refeicao,
+                    this.quantidade
+            );
         }
     }
 }

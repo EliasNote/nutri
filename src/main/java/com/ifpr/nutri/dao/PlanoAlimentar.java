@@ -135,14 +135,14 @@ public class PlanoAlimentar {
         }
 
         public PlanoAlimentar build() {
-            PlanoAlimentar p = new PlanoAlimentar();
-            p.setId(id);
-            p.setPessoa(pessoa);
-            p.setRefeicoes(refeicoes);
-            p.setDataInicio(dataInicio);
-            p.setDataFim(dataFim);
-            p.setObservacoes(observacoes);
-            return p;
+            return new PlanoAlimentar(
+                    this.id,
+                    this.pessoa,
+                    this.refeicoes,
+                    this.dataInicio,
+                    this.dataFim,
+                    this.observacoes
+            );
         }
     }
 }

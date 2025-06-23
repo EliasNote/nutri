@@ -145,14 +145,14 @@ public class Refeicao {
         }
 
         public Refeicao build() {
-            Refeicao r = new Refeicao();
-            r.setId(id);
-            r.setPessoa(pessoa);
-            r.setItens(itens);
-            r.setPlanoAlimentar(planoAlimentar);
-            r.setData(data);
-            r.setTipo(tipo);
-            return r;
+            return new Refeicao(
+                    this.id,
+                    this.pessoa,
+                    this.itens,
+                    this.planoAlimentar,
+                    this.data,
+                    this.tipo
+            );
         }
     }
 }
