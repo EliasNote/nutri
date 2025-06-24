@@ -12,10 +12,9 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public Pessoa create(Pessoa pessoa) {
+    public void create(Pessoa pessoa) {
         pessoa.setSenha(BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt()));
-
-        return pessoaRepository.save(pessoa);
+        pessoaRepository.save(pessoa);
     }
 
     public boolean autenticar(String cpf, String senha) {

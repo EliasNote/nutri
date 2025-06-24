@@ -1,6 +1,8 @@
 package com.ifpr.nutri.dao;
 
+import com.ifpr.nutri.dto.alimento.ItemAlimentoCreateDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoCreateDto;
+import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -50,8 +52,8 @@ public class Refeicao {
         this.tipo = tipo;
     }
 
-    public Refeicao create(RefeicaoCreateDto dto) {
-        return new Refeicao(null, dto.pessoa(), dto.itens(), dto.plano(), dto.data(), dto.tipo());
+    public RefeicaoResponseDto create(RefeicaoCreateDto dto) {
+        return new RefeicaoResponseDto(null, dto.pessoa().getCpf(), dto.data(), dto.tipo().toString(), dto.itens().stream().map(x -> new ItemAlimentoCreateDto(x.getId(), x.getQuantidade())).toList());
     }
 
     public PlanoAlimentar getPlanoAlimentar() {
