@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaController {
@@ -19,8 +21,15 @@ public class PessoaController {
         pessoaService.create(pessoa);
         return ResponseEntity.noContent().build();
     }
+
     @PatchMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginDto loginDto) {
         return ResponseEntity.ok(pessoaService.autenticar(loginDto.cpf(), loginDto.senha()));
+    }
+
+    @GetMapping("/generate")
+    public ResponseEntity<Void> generate(@RequestParam String cpf, @RequestParam LocalDate date) {
+        pessoaService.generate(cpf, date);
+        return ResponseEntity.ok().build();
     }
 }

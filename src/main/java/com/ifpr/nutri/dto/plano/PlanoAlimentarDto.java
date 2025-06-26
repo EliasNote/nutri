@@ -5,7 +5,6 @@ import java.util.List;
 
 public record PlanoAlimentarDto(
         String pessoaCpf,
-        List<Long> refeicoesIds,
         LocalDate dataInicio,
         LocalDate dataFim,
         String observacoes

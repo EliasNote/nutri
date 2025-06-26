@@ -6,6 +6,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class PessoaService {
 
@@ -27,5 +29,9 @@ public class PessoaService {
 
     public Pessoa findByCpf(String cpf) {
         return pessoaRepository.findByCpf(cpf).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+    }
+
+    public void generate(String cpf, LocalDate date) {
+
     }
 }

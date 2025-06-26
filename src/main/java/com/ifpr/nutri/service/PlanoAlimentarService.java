@@ -11,6 +11,7 @@ import com.ifpr.nutri.repository.PlanoAlimentarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,7 @@ public class PlanoAlimentarService {
         PlanoAlimentar plano = PlanoAlimentar.builder()
                 .id(null)
                 .pessoa(pessoa)
-                .refeicoes(null)
+                .refeicoes(new ArrayList<>())
                 .dataInicio(dto.dataInicio())
                 .dataFim(dto.dataFim())
                 .observacoes(dto.observacoes())
