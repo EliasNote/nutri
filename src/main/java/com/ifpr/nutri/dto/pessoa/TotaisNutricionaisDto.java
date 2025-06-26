@@ -5,6 +5,6 @@ public record TotaisNutricionaisDto(
         Double totalProteinas,
         Double totalCarboidratos,
         Double totalGorduras,
-        String IMC
+        Double IMC
 ) {
 }

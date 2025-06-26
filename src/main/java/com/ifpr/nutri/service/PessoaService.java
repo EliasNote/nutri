@@ -6,6 +6,7 @@ import com.ifpr.nutri.dao.Pessoa;
 import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dto.pessoa.RelatorioDto;
 import com.ifpr.nutri.dto.pessoa.TotaisNutricionaisDto;
+import com.ifpr.nutri.mapper.AlimentoMapper;
 import com.ifpr.nutri.repository.PessoaRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class PessoaService {
         LocalDateTime fim = LocalDateTime.now();
 
         List<Refeicao> refeicoesPeriodo = pessoa.getRefeicoes().stream()
-                .filter(r -> r.getData().isAfter(inicio) && r.getData().isBefore(fim))
+                .filter(refeicao -> refeicao.getData().isAfter(inicio) && refeicao.getData().isBefore(fim))
                 .toList();
 
         double totalCalorias = 0, totalProteinas = 0, totalCarboidratos = 0, totalGorduras = 0;
@@ -65,18 +66,11 @@ public class PessoaService {
             }
         }
 
-        // Top 10 caloric foods
-        List<Alimento> alimentosCaloricos = caloriasPorAlimento.entrySet().stream()
-                .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
-                .limit(10)
-                .map(Map.Entry::getKey)
-                .toList();
+        List<Alimento> alimentosCaloricos = getCaloricFoods(caloriasPorAlimento, 10);
 
-        // Calculate BMI (IMC)
-        String imc = "";
+        double imc = 0.00;
         if (pessoa.getPeso() != null && pessoa.getAltura() != null && pessoa.getAltura() > 0) {
-            double valorImc = pessoa.getPeso() / (pessoa.getAltura() * pessoa.getAltura());
-            imc = String.format("%.2f", valorImc);
+            imc = pessoa.getPeso() / (pessoa.getAltura() * pessoa.getAltura());
         }
 
         TotaisNutricionaisDto totaisNutricionais = new TotaisNutricionaisDto(
@@ -88,22 +82,12 @@ public class PessoaService {
                 date,
                 fim.toLocalDate(),
                 totaisNutricionais,
-                alimentosCaloricos
+                alimentosCaloricos.stream().map(AlimentoMapper::toResponseDto).toList()
         );
     }
 
-    public List<Alimento> getCaloricFoods(Pessoa pessoa, int limit) {
-        Map<Alimento, Double> caloriasPorAlimento = new HashMap<>();
-
-        for (Refeicao refeicao : pessoa.getRefeicoes()) {
-            for (ItemAlimento item : refeicao.getItens()) {
-                Alimento alimento = item.getAlimento();
-                double caloriasConsumidas = alimento.getCalorias() * item.getQuantidade();
-                caloriasPorAlimento.merge(alimento, caloriasConsumidas, Double::sum);
-            }
-        }
-
-        return caloriasPorAlimento.entrySet().stream()
+    public List<Alimento> getCaloricFoods(Map<Alimento, Double> alimentos, int limit) {
+        return alimentos.entrySet().stream()
                 .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
                 .limit(limit)
                 .map(Map.Entry::getKey)

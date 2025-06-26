@@ -2,6 +2,7 @@ package com.ifpr.nutri.controller;
 
 import com.ifpr.nutri.dao.Pessoa;
 import com.ifpr.nutri.dto.LoginDto;
+import com.ifpr.nutri.dto.pessoa.RelatorioDto;
 import com.ifpr.nutri.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,7 @@ public class PessoaController {
     }
 
     @GetMapping("/generate")
-    public ResponseEntity<Void> generate(@RequestParam String cpf, @RequestParam LocalDate date) {
-        pessoaService.generate(cpf, date);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<RelatorioDto> generate(@RequestParam String cpf, @RequestParam LocalDate date) {
+        return ResponseEntity.ok(pessoaService.generate(cpf, date));
     }
 }
