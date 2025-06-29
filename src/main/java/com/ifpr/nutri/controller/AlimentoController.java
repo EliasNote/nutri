@@ -1,6 +1,7 @@
 package com.ifpr.nutri.controller;
 
 import com.ifpr.nutri.dao.Alimento;
+import com.ifpr.nutri.dao.Alimento.Unidade;
 import com.ifpr.nutri.dto.alimento.AlimentoResponseDto;
 import com.ifpr.nutri.service.AlimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,23 @@ public class AlimentoController {
         return ResponseEntity.ok(alimentoService.findAll());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(
+        @PathVariable Long id,
+        @RequestParam(required = false) String nome,
+        @RequestParam(required = false) Double calorias,
+        @RequestParam(required = false) Double proteinas,
+        @RequestParam(required = false) Double carboidratos,
+        @RequestParam(required = false) Double gorduras,
+        @RequestParam(required = false) String porcao
+    ) {
+        alimentoService.update(id, nome, calorias, proteinas, carboidratos, gorduras, porcao);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        alimentoService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

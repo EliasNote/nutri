@@ -30,4 +30,23 @@ public class AlimentoService {
     public List<AlimentoResponseDto> findAll() {
         return alimentoRepository.findAll().stream().map(AlimentoMapper::toResponseDto).toList();
     }
+
+    public void update(
+        Long id,
+        String nome,
+        Double calorias,
+        Double proteinas,
+        Double carboidratos,
+        Double gorduras,
+        String porcao
+    ) {
+        Alimento alimento = findById(id);
+        Alimento updated = updateFromParams(alimento, nome, calorias, proteinas, carboidratos, gorduras, porcao);
+        alimentoRepository.save(updated);
+    }
+
+    public void deleteById(Long id) {
+        Alimento a = findById(id);
+        alimentoRepository.delete(a);
+    }
 }

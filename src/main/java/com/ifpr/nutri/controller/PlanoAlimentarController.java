@@ -2,13 +2,13 @@ package com.ifpr.nutri.controller;
 
 import com.ifpr.nutri.dto.plano.PlanoAlimentarDto;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarResponseDto;
-import com.ifpr.nutri.dto.plano.PlanoAlimentarUpdateDto;
 import com.ifpr.nutri.service.PlanoAlimentarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,9 +28,15 @@ public class PlanoAlimentarController {
         return ResponseEntity.ok(planoAlimentarService.findAll());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody PlanoAlimentarUpdateDto dto) {
-        planoAlimentarService.update(id, dto);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(
+        @PathVariable Long id,
+        @RequestParam(required = false) List<Long> refeicoesIds,
+        @RequestParam(required = false) LocalDate dataInicio,
+        @RequestParam(required = false) LocalDate dataFim,
+        @RequestParam(required = false) String observacoes
+    ) {
+        planoAlimentarService.update(id, refeicoesIds, dataInicio, dataFim, observacoes);
         return ResponseEntity.noContent().build();
     }
 

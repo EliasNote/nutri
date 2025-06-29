@@ -2,7 +2,6 @@ package com.ifpr.nutri.service;
 
 import com.ifpr.nutri.dao.*;
 import com.ifpr.nutri.dto.alimento.ItemAlimentoCreateDto;
-import com.ifpr.nutri.dto.alimento.ItemAlimentoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 import com.ifpr.nutri.dto.refeicao.RefeicaoUpdateDto;

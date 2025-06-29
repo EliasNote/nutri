@@ -3,9 +3,8 @@ package com.ifpr.nutri.mapper;
 import com.ifpr.nutri.dao.PlanoAlimentar;
 import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarResponseDto;
-import com.ifpr.nutri.dto.plano.PlanoAlimentarUpdateDto;
-import com.ifpr.nutri.dto.refeicao.RefeicaoResponseDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class PlanoMapper {
@@ -20,19 +19,19 @@ public class PlanoMapper {
         );
     }
 
-    public static PlanoAlimentar updateFromDto(PlanoAlimentar plano, List<Refeicao> refeicoes, PlanoAlimentarUpdateDto dto) {
-        if (dto.dataInicio() != null) {
-            plano.setDataInicio(dto.dataInicio());
-        }
-        if (dto.dataFim() != null) {
-            plano.setDataFim(dto.dataFim());
-        }
-        if (dto.observacoes() != null) {
-            plano.setObservacoes(dto.observacoes());
-        }
-        if (dto.refeicoesIds() != null && !dto.refeicoesIds().isEmpty()) {
+    public static PlanoAlimentar updateFromParams(
+        PlanoAlimentar plano,
+        List<Refeicao> refeicoes,
+        LocalDate dataInicio,
+        LocalDate dataFim,
+        String observacoes
+    ) {
+        if (dataInicio != null) plano.setDataInicio(dataInicio);
+        if (dataFim != null) plano.setDataFim(dataFim);
+        if (observacoes != null) plano.setObservacoes(observacoes);
+        if (refeicoes != null) {
             plano.getRefeicoes().clear();
-            refeicoes.forEach(x -> plano.getRefeicoes().add(x));
+            refeicoes.forEach(plano.getRefeicoes()::add);
         }
         return plano;
     }

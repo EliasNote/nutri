@@ -5,14 +5,15 @@ import com.ifpr.nutri.dao.PlanoAlimentar;
 import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarDto;
 import com.ifpr.nutri.dto.plano.PlanoAlimentarResponseDto;
-import com.ifpr.nutri.dto.plano.PlanoAlimentarUpdateDto;
 import com.ifpr.nutri.mapper.PlanoMapper;
 import com.ifpr.nutri.repository.PlanoAlimentarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlanoAlimentarService {
@@ -47,14 +48,26 @@ public class PlanoAlimentarService {
         planoAlimentarRepository.deleteById(id);
     }
 
-    public void update(Long id, PlanoAlimentarUpdateDto dto) {
+    public void update(
+        Long id,
+        List<Long> refeicoesIds,
+        LocalDate dataInicio,
+        LocalDate dataFim,
+        String observacoes
+    ) {
         PlanoAlimentar plano = planoAlimentarRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Plano alimentar não encontrado"));
+            .orElseThrow(() -> new RuntimeException("Plano não encontrado"));
 
-        List<Refeicao> refeicoes = refeicaoService.findAllByIdAndPessoaCpf(dto.refeicoesIds(), plano.getPessoa().getCpf());
+        List<Refeicao> refeicoes = null;
+        if (refeicoesIds != null) {
+            refeicoes = refeicoesIds.stream()
+                .map(refeicaoService::findById)
+                .collect(Collectors.toList());
+        }
 
-        planoAlimentarRepository.save(
-                PlanoMapper.updateFromDto(plano, refeicoes, dto)
+        PlanoAlimentar updated = PlanoMapper.updateFromParams(
+            plano, refeicoes, dataInicio, dataFim, observacoes
         );
+        planoAlimentarRepository.save(updated);
     }
 }
