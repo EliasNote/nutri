@@ -121,4 +121,9 @@ public class PessoaService {
         );
         pessoaRepository.save(atualizado);
     }
+
+    public void deleteByCpf(String cpf) {
+        Pessoa pessoa = findByCpf(cpf);
+        pessoaRepository.delete(pessoa);
+    }
 }

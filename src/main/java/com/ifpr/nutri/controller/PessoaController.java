@@ -60,4 +60,10 @@ public class PessoaController {
         );
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{cpf}")
+    public ResponseEntity<Void> delete(@PathVariable String cpf) {
+        pessoaService.deleteByCpf(cpf);
+        return ResponseEntity.noContent().build();
+    }
 }
