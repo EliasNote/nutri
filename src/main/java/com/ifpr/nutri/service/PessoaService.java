@@ -7,6 +7,7 @@ import com.ifpr.nutri.dao.Refeicao;
 import com.ifpr.nutri.dto.pessoa.RelatorioDto;
 import com.ifpr.nutri.dto.pessoa.TotaisNutricionaisDto;
 import com.ifpr.nutri.mapper.AlimentoMapper;
+import com.ifpr.nutri.mapper.PessoaMapper;
 import com.ifpr.nutri.repository.PessoaRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +93,32 @@ public class PessoaService {
                 .limit(limit)
                 .map(Map.Entry::getKey)
                 .toList();
+    }
+
+    public void update(
+            String username,
+            String nome,
+            String cpf,
+            String senha,
+            Integer idade,
+            Double peso,
+            Double altura,
+            List<String> objetivos,
+            List<Alimento> restricoesAlimentares
+    ) {
+        Pessoa pessoa = findByCpf(cpf);
+        Pessoa atualizado = PessoaMapper.updateFromParams(
+                pessoa,
+                username,
+                nome,
+                cpf,
+                senha,
+                idade,
+                peso,
+                altura,
+                objetivos,
+                restricoesAlimentares
+        );
+        pessoaRepository.save(atualizado);
     }
 }
