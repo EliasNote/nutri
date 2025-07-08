@@ -25,30 +25,24 @@ public class RefeicaoRepositoryTests {
 
     @Test
     void deveSalvarRefeicao() {
-        Pessoa pessoa = criarPessoa();
         Refeicao refeicao = new Refeicao();
         refeicao.setData(LocalDateTime.now());
         refeicao.setTipo(Tipo.ALMOCO);
-        refeicao.setPessoa(pessoa);
 
         Refeicao salva = refeicaoRepository.save(refeicao);
 
         assertThat(salva.getId()).isNotNull();
-        assertThat(salva.getPessoa()).isEqualTo(pessoa);
     }
 
     @Test
     void deveBuscarTodasRefeicoes() {
-        Pessoa pessoa = criarPessoa();
         Refeicao r1 = new Refeicao();
         r1.setData(LocalDateTime.now());
         r1.setTipo(Tipo.JANTAR);
-        r1.setPessoa(pessoa);
 
         Refeicao r2 = new Refeicao();
         r2.setData(LocalDateTime.now());
         r2.setTipo(Tipo.CAFE_DA_MANHA);
-        r2.setPessoa(pessoa);
 
         refeicaoRepository.save(r1);
         refeicaoRepository.save(r2);
@@ -59,11 +53,9 @@ public class RefeicaoRepositoryTests {
 
     @Test
     void deveAtualizarRefeicao() {
-        Pessoa pessoa = criarPessoa();
         Refeicao refeicao = new Refeicao();
         refeicao.setData(LocalDateTime.now());
         refeicao.setTipo(Tipo.LANCHE);
-        refeicao.setPessoa(pessoa);
 
         refeicao = refeicaoRepository.save(refeicao);
         refeicao.setTipo(Tipo.ALMOCO);
@@ -74,25 +66,14 @@ public class RefeicaoRepositoryTests {
 
     @Test
     void deveExcluirRefeicao() {
-        Pessoa pessoa = criarPessoa();
         Refeicao refeicao = new Refeicao();
         refeicao.setData(LocalDateTime.now());
         refeicao.setTipo(Tipo.ALMOCO);
-        refeicao.setPessoa(pessoa);
 
         refeicao = refeicaoRepository.save(refeicao);
         refeicaoRepository.delete(refeicao);
 
         boolean existe = refeicaoRepository.findById(refeicao.getId()).isPresent();
         assertThat(existe).isFalse();
-    }
-
-    private Pessoa criarPessoa() {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Teste");
-        pessoa.setUsername("teste");
-        pessoa.setSenha("123456");
-        pessoa.setCpf("00011122233");
-        return pessoaRepository.save(pessoa);
     }
 }

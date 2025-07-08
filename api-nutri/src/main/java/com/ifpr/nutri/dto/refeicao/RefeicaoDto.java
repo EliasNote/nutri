@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record RefeicaoDto(
-        String pessoaCpf,
         Long planoId,
         LocalDateTime data,
         String tipo,

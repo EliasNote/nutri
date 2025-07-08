@@ -48,7 +48,8 @@ public class PessoaService {
         LocalDateTime inicio = date.atStartOfDay();
         LocalDateTime fim = LocalDateTime.now();
 
-        List<Refeicao> refeicoesPeriodo = pessoa.getRefeicoes().stream()
+        List<Refeicao> refeicoesPeriodo = pessoa.getPlanosAlimentares().stream()
+                .flatMap(plano -> plano.getRefeicoes().stream())
                 .filter(refeicao -> refeicao.getData().isAfter(inicio) && refeicao.getData().isBefore(fim))
                 .toList();
 

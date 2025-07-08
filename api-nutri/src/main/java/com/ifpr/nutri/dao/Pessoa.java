@@ -48,15 +48,12 @@ public class Pessoa {
     private List<Alimento> restricoesAlimentares;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<Refeicao> refeicoes;
-
-    @OneToMany(mappedBy = "pessoa")
     private List<PlanoAlimentar> planosAlimentares;
 
     public Pessoa() {
     }
 
-    public Pessoa(Long id, String username, String nome, String cpf, String senha, Integer idade, Double peso, Double altura, List<String> objetivos, List<Alimento> restricoesAlimentares, List<Refeicao> refeicoes, List<PlanoAlimentar> planosAlimentares) {
+    public Pessoa(Long id, String username, String nome, String cpf, String senha, Integer idade, Double peso, Double altura, List<String> objetivos, List<Alimento> restricoesAlimentares, List<PlanoAlimentar> planosAlimentares) {
         this.id = id;
         this.username = username;
         this.nome = nome;
@@ -67,12 +64,11 @@ public class Pessoa {
         this.altura = altura;
         this.objetivos = objetivos;
         this.restricoesAlimentares = restricoesAlimentares;
-        this.refeicoes = refeicoes;
         this.planosAlimentares = planosAlimentares;
     }
 
     public void create(String username, String nome, String cpf, String senha, Integer idade, Double peso, Double altura, List<String> objetivos, List<Alimento> restricoesAlimentares) {
-        new Pessoa(null, username, nome, cpf, senha, idade, peso, altura, objetivos, restricoesAlimentares, null, null);
+        new Pessoa(null, username, nome, cpf, senha, idade, peso, altura, objetivos, restricoesAlimentares, null);
     }
 
     public List<PlanoAlimentar> getPlanosAlimentares() {
@@ -163,14 +159,6 @@ public class Pessoa {
         this.restricoesAlimentares = restricoesAlimentares;
     }
 
-    public List<Refeicao> getRefeicoes() {
-        return refeicoes;
-    }
-
-    public void setRefeicoes(List<Refeicao> refeicoes) {
-        this.refeicoes = refeicoes;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -186,7 +174,6 @@ public class Pessoa {
         private Double altura;
         private List<String> objetivos;
         private List<Alimento> restricoesAlimentares;
-        private List<Refeicao> refeicoes;
         private List<PlanoAlimentar> planosAlimentares;
 
         public Builder id(Long id) {
@@ -239,11 +226,6 @@ public class Pessoa {
             return this;
         }
 
-        public Builder refeicoes(List<Refeicao> refeicoes) {
-            this.refeicoes = refeicoes;
-            return this;
-        }
-
         public Builder planosAlimentares(List<PlanoAlimentar> planosAlimentares) {
             this.planosAlimentares = planosAlimentares;
             return this;
@@ -261,7 +243,6 @@ public class Pessoa {
                     this.altura,
                     this.objetivos,
                     this.restricoesAlimentares,
-                    this.refeicoes,
                     this.planosAlimentares
             );
         }

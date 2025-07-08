@@ -84,7 +84,6 @@ public class ItemAlimentoRepositoryTests {
         Refeicao r = new Refeicao();
         r.setData(LocalDateTime.now());
         r.setTipo(Tipo.CAFE_DA_MANHA);
-        r.setPessoa(pessoa);
         return refeicaoRepository.save(r);
     }
 }

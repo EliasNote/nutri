@@ -20,7 +20,6 @@ public class RefeicaoMapper {
 
         return new RefeicaoResponseDto(
                 refeicao.getId(),
-                refeicao.getPessoa().getCpf(),
                 refeicao.getData(),
                 refeicao.getTipo().name(),
                 itens

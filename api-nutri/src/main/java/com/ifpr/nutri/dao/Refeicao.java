@@ -15,10 +15,6 @@ public class Refeicao {
     @Column(nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa;
-
     @OneToMany(mappedBy = "refeicao", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemAlimento> itens;
 
@@ -43,9 +39,8 @@ public class Refeicao {
     public Refeicao() {
     }
 
-    public Refeicao(Long id, Pessoa pessoa, List<ItemAlimento> itens, PlanoAlimentar planoAlimentar, LocalDateTime data, Tipo tipo) {
+    public Refeicao(Long id, List<ItemAlimento> itens, PlanoAlimentar planoAlimentar, LocalDateTime data, Tipo tipo) {
         this.id = id;
-        this.pessoa = pessoa;
         this.itens = itens;
         this.planoAlimentar = planoAlimentar;
         this.data = data;
@@ -53,7 +48,7 @@ public class Refeicao {
     }
 
     public RefeicaoResponseDto create(RefeicaoCreateDto dto) {
-        return new RefeicaoResponseDto(null, dto.pessoa().getCpf(), dto.data(), dto.tipo().toString(), dto.itens().stream().map(x -> new ItemAlimentoCreateDto(x.getId(), x.getQuantidade())).toList());
+        return new RefeicaoResponseDto(null, dto.data(), dto.tipo().toString(), dto.itens().stream().map(x -> new ItemAlimentoCreateDto(x.getId(), x.getQuantidade())).toList());
     }
 
     public PlanoAlimentar getPlanoAlimentar() {
@@ -70,14 +65,6 @@ public class Refeicao {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public List<ItemAlimento> getItens() {
@@ -110,7 +97,6 @@ public class Refeicao {
 
     public static class Builder {
         private Long id;
-        private Pessoa pessoa;
         private List<ItemAlimento> itens;
         private PlanoAlimentar planoAlimentar;
         private LocalDateTime data;
@@ -118,11 +104,6 @@ public class Refeicao {
 
         public Builder id(Long id) {
             this.id = id;
-            return this;
-        }
-
-        public Builder pessoa(Pessoa pessoa) {
-            this.pessoa = pessoa;
             return this;
         }
 
@@ -149,7 +130,6 @@ public class Refeicao {
         public Refeicao build() {
             return new Refeicao(
                     this.id,
-                    this.pessoa,
                     this.itens,
                     this.planoAlimentar,
                     this.data,

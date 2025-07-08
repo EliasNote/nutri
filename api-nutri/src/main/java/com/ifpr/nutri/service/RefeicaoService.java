@@ -22,21 +22,16 @@ public class RefeicaoService {
     private RefeicaoRepository refeicaoRepository;
 
     @Autowired
-    private PessoaService pessoaService;
-
-    @Autowired
     private AlimentoService alimentoService;
 
     @Autowired
     private PlanoAlimentarRepository planoAlimentarRepository;
 
     public RefeicaoResponseDto create(RefeicaoDto dto) {
-        Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
         PlanoAlimentar planoAlimentar = planoAlimentarRepository.findById(dto.planoId()).orElseThrow(() -> new RuntimeException("Não achado"));
 
         Refeicao refeicao = Refeicao.builder()
                 .id(null)
-                .pessoa(pessoa)
                 .itens(null)
                 .planoAlimentar(planoAlimentar)
                 .data(dto.data())
@@ -54,10 +49,6 @@ public class RefeicaoService {
 
     public Refeicao findById(Long id) {
         return refeicaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Refeição não encontrada"));
-    }
-
-    public List<Refeicao> findAllByIdAndPessoaCpf(List<Long> ids, String cpf) {
-        return refeicaoRepository.findAllByIdInAndPessoaCpf(ids, cpf);
     }
 
     public List<RefeicaoResponseDto> findAll() {
