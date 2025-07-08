@@ -29,7 +29,6 @@ public class PlanoAlimentarService {
         Pessoa pessoa = pessoaService.findByCpf(dto.pessoaCpf());
 
         PlanoAlimentar plano = PlanoAlimentar.builder()
-                .id(null)
                 .pessoa(pessoa)
                 .refeicoes(new ArrayList<>())
                 .dataInicio(dto.dataInicio())

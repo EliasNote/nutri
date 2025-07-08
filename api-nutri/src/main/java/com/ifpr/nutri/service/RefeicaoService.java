@@ -31,8 +31,6 @@ public class RefeicaoService {
         PlanoAlimentar planoAlimentar = planoAlimentarRepository.findById(dto.planoId()).orElseThrow(() -> new RuntimeException("Não achado"));
 
         Refeicao refeicao = Refeicao.builder()
-                .id(null)
-                .itens(null)
                 .planoAlimentar(planoAlimentar)
                 .data(dto.data())
                 .tipo(Refeicao.Tipo.valueOf(dto.tipo()))
